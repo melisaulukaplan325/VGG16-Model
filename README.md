@@ -1,2 +1,2 @@
 # staj22-23
-Mnist Dataset and vgg16
+Training VGG16 model with MNIST dataset. Main library that used id PyTorch. 
