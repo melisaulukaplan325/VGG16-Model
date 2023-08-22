@@ -23,15 +23,17 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 test_loader = Test_Dataset(image_path= test_path_loader, batch_size=1, shuffle=True)
 
-model = models.vgg16(pretrained=True)
+#model = models.vgg16(pretrained=True)
 
-inlayer = nn.Conv2d(1, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
-outlayer = nn.Sequential(nn.Linear(4096, 10, bias = True), nn.Softmax(dim=1))
+# inlayer = nn.Conv2d(1, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+# outlayer = nn.Sequential(nn.Linear(4096, 10, bias = True), nn.Softmax(dim=1))
 
-model.features[0] = inlayer
-model.classifier[-1] = outlayer
-model.cuda()
+# model.features[0] = inlayer
+# model.classifier[-1] = outlayer
+# model.cuda()
 
+model = torch.load("model path")
+model.eval()
 
 cost = torch.nn.CrossEntropyLoss().cuda()#calculates loss in multiclass and binary classification
 optimizer = torch.optim.SGD(model.parameters(), lr= 0.00001)#optimizing parameters 
